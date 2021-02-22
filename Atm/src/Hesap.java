@@ -1,35 +1,22 @@
-import java.util.Scanner;
 
 public class Hesap {
-	private String kullanici_adi;
+
+	private String isim;
+	private int para;
+	private boolean baba;
+	private int giris;
+	private int id;
 	private String sifre;
-	private int bakiye;
-
-	public Hesap(String kullanici_adi, String sifre, int bakiye) {
-		this.kullanici_adi = kullanici_adi;
-		this.sifre = sifre;
-		this.bakiye = bakiye;
-	}
-
-	public void Menu() {
-
-		System.out.println("********************************");
-		String islemler = "1. Bakiye Görüntüleme\n" + "2. Para Yatırma\n" + "3. Para Çekme\n"
-				+ "4. Çıkış için exit yazınız.";
-		System.out.println(islemler);
-		System.out.println("********************************");
-	}
-
-	public Hesap() {
-
-	}
-
-	public String getkullanici_adi() {
-		return kullanici_adi;
-	}
-
-	public void setkullanici_adi(String kullanici_adi) {
-		this.kullanici_adi = kullanici_adi;
+	
+	
+	public Hesap(String isim, String sifre, int para, boolean baba, int giris, int id){
+		
+		this.isim=isim;
+		this.para=para;
+		this.baba=baba;
+		this.giris=giris;
+		this.id=id;
+		this.sifre=sifre;
 	}
 
 	public String getSifre() {
@@ -40,49 +27,47 @@ public class Hesap {
 		this.sifre = sifre;
 	}
 
-	public int getBakiye() {
-		return bakiye;
+	public String getIsim() {
+		return isim;
 	}
 
-	public void setBakiye(int bakiye) {
-		this.bakiye = bakiye;
+	public void setIsim(String isim) {
+		this.isim = isim;
 	}
 
-	public void paraYatir(int miktar) {
-		do {
-			if (miktar <= 0) {
-				System.out.println("Lütfen 0'dan büyük bir sayı giriniz...");
-				break;
-			} else {
-				bakiye += miktar;
-				System.out.println(miktar + " tl yatırıldı\nYeni bakiye: " + bakiye);
-				break;
-			}
-
-		} while (true);
-
+	public int getPara() {
+		return para;
 	}
 
-	public void paraCek(int miktar) {
+	public void setPara(int para) {
+		this.para = para;
+	}
 
-		if (miktar <= 0) {
-			System.out.println("Lütfen 0'dan büyük bir sayı giriniz.");
-			Scanner in = new Scanner(System.in);
-			int yenimiktar = in.nextInt();
-			paraCek(yenimiktar);
-
-		} else {
-			if (miktar > 2000) {
-				System.out.println("Bir gunde 2000 tl'den fazla cekemezsiniz.");
-			} else if (bakiye >= miktar) {
-				bakiye -= miktar;
-				System.out.println(miktar + " tl cekildi\nYeni bakiye: " + bakiye);
-			} else {
-				System.out.println("Bakiyenizden fazla cekemezsiniz! Bakiyeniz: " + bakiye);
-			}
-			if (bakiye == 0) {
-				System.err.println("Artık fakirsiniz(babanız yok)");
-			}
+	public boolean isBaba() {
+		if(baba==false) {
+			System.out.println("Welcome to club");
+			
 		}
+			return baba;
+	}
+
+	public void setBaba(boolean baba) {
+		this.baba = baba;
+	}
+
+	public int getGiris() {
+		return giris;
+	}
+
+	public void setGiris(int giris) {
+		this.giris = giris;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 }
