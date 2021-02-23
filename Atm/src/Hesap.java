@@ -3,22 +3,23 @@ public class Hesap {
 
 	private String isim;
 	private int para;
-	private boolean baba;
+	private boolean buba;
 	private int giris;
 	private int id;
 	private String sifre;
 	
 	
-	public Hesap(String isim, String sifre, int para, boolean baba, int giris, int id){
+	public Hesap(String isim, String sifre, int para, boolean buba, int giris, int id){
 		
 		this.isim=isim;
 		this.para=para;
-		this.baba=baba;
+		this.buba=buba;
 		this.giris=giris;
 		this.id=id;
 		this.sifre=sifre;
 	}
 
+	
 	public String getSifre() {
 		return sifre;
 	}
@@ -43,16 +44,12 @@ public class Hesap {
 		this.para = para;
 	}
 
-	public boolean isBaba() {
-		if(baba==false) {
-			System.out.println("Welcome to club");
-			
-		}
-			return baba;
+	public boolean isbuba() {
+			return buba;
 	}
 
-	public void setBaba(boolean baba) {
-		this.baba = baba;
+	public void setbuba(boolean buba) {
+		this.buba = buba;
 	}
 
 	public int getGiris() {
