@@ -17,8 +17,8 @@ public class Main {
 			System.out.println("2. Para yatır");
 			System.out.println("3. Para çek");
 			System.out.println("4. Para gönder");
-			System.out.println("5. Çıkış yap");
-			System.out.println("6. Ana menüye dön");
+			System.out.println("5. Programdan çık");
+			System.out.println("6. Girişe dön");
 			System.out.println("**********************************************");
 
 			String secim = in.next();
@@ -45,14 +45,14 @@ public class Main {
 				paraCek(miktar, index);
 				break;
 			case "4":
-				int id=0;
-				 miktar=1;
-				paraGonder(miktar,index,id);
+				paraGonder(index);
 				break;
 			case "5":
+				System.err.println("Çıkış yapılıyor...");
 				break menu;
 			case "6":
 				in.hasNextLine();
+				in.nextLine();
 				startUp();
 				break;
 			}
@@ -111,35 +111,20 @@ public class Main {
 	}
 
 	private static void login() {
-		int i;
-		boolean isContains = false;
-
 		System.out.println("Girişe hoşgeldiniz...");
-		System.out.println("ID'nizi giriniz: ");
-		int id = in.nextInt();
-		String x = in.nextLine();
-		for (i = 0; i < Database.hesapList.size(); i++) {
+		Hesap yasar = findId();
 
-			if (Database.hesapList.get(i).getId() == id) {
-				isContains = true;
-				break;
-			}
-		}
-		if (isContains) {
-			System.out.println("Şifrenizi giriniz:");
-			String sifre = in.nextLine();
+		System.out.println("Şifrenizi giriniz:");
+		in.nextLine();
+		String sifre = in.nextLine();
 
-			if (Database.hesapList.get(i).getSifre().equals(sifre)) {
-				Database.hesapList.get(i).setGiris(Database.hesapList.get(i).getGiris() + 1);
-				menu(i);
-
-			} else {
-				System.out.println("Şifrenizi yanlış girdiniz... Lütfen tekrar deneyiniz.");
-				login();
-			}
+		if (yasar.getSifre().equals(sifre)) {
+			yasar.setGiris(yasar.getGiris() + 1);
+			int i = Database.hesapList.indexOf(yasar);
+			menu(i);
 
 		} else {
-			System.out.println("ID'nizi yanlış girdiniz... Lütfen tekrar deneyiniz.");
+			System.out.println("Şifrenizi yanlış girdiniz... Lütfen tekrar deneyiniz.");
 			login();
 		}
 
@@ -185,26 +170,44 @@ public class Main {
 
 	}
 
-	private static void paraGonder(int miktar, int index, int id) {
+	private static void paraGonder(int index) {
 		System.out.println("Miktarı giriniz: ");
-		miktar = in.nextInt();
-		if (miktar > 0 && miktar<=Database.hesapList.get(index).getPara()) {
+		int miktar = in.nextInt();
+		if (miktar > 0 && miktar <= Database.hesapList.get(index).getPara()) {
 			System.out.println("Para göndermek istediğiniz hesabın ID'sini giriniz: ");
-			id = in.nextInt();
-			if ((id-1) != index) {
-				Database.hesapList.get(index).setPara(Database.hesapList.get(index).getPara() - miktar);
-				Database.hesapList.get(id-1).setPara(Database.hesapList.get(id-1).getPara() + miktar);
-				System.out.println("İşlem başarılı," + miktar + " tl gönderildi, yeni bakiyeniz: " + Database.hesapList.get(index).getPara());
-				return;
-			} else {
-				System.out.println("Kendi kendinize para gönderemezsiniz...\nLütfen tekrar ID giriniz: ");
-				int id2 = in.nextInt();
-				paraGonder(miktar, index, id2);
+			Hesap yasar = findId();
+			Database.hesapList.get(index).setPara(Database.hesapList.get(index).getPara() - miktar);
+			Database.hesapList.get(Database.hesapList.indexOf(yasar)).setPara(yasar.getPara() + miktar);
+			System.out.println("Parayı yolladın enayi (" + miktar + " tl)\nYeni bakiyen: "
+					+ Database.hesapList.get(index).getPara());
 
-			}
 		} else {
-			System.out.println("Değer 0'dan büyük olmalıdır veya bakiyenizden küöük olmalıdır; Bakiyeniz: " + Database.hesapList.get(index).getPara() + "\nİşlem iptal ediliyor...");
+			System.out.println("Değer 0'dan büyük olmalıdır veya bakiyenizden küçük olmalıdır; Bakiyeniz: "
+					+ Database.hesapList.get(index).getPara() + "\nİşlem iptal ediliyor...");
 			return;
 		}
+	}
+
+	public static Hesap findId() {
+
+		int i;
+		boolean isContains = false;
+
+		System.out.println("ID giriniz:  ");
+		int id = in.nextInt();
+		for (i = 0; i < Database.hesapList.size(); i++) {
+
+			if (Database.hesapList.get(i).getId() == id) {
+				isContains = true;
+				break;
+			}
+		}
+		if (!isContains) {
+
+			System.out.println("ID'yi yanlış girdiniz... Lütfen tekrar deneyiniz.");
+			return findId();
+
+		}
+		return Database.hesapList.get(i);
 	}
 }
