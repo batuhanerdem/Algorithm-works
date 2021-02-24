@@ -17,8 +17,8 @@ public class Main {
 			System.out.println("2. Para yatır");
 			System.out.println("3. Para çek");
 			System.out.println("4. Para gönder");
-			System.out.println("5. Programdan çık");
-			System.out.println("6. Girişe dön");
+			System.out.println("5. Girişe dön ");
+			System.out.println("6. Programdan çık ");
 			System.out.println("**********************************************");
 
 			String secim = in.next();
@@ -47,10 +47,10 @@ public class Main {
 			case "4":
 				paraGonder(index);
 				break;
-			case "5":
-				System.err.println("Çıkış yapılıyor...");
-				break menu;
 			case "6":
+				System.out.println("Çıkış yapılıyor...");
+				break menu;
+			case "5":
 				in.hasNextLine();
 				in.nextLine();
 				startUp();
@@ -176,10 +176,16 @@ public class Main {
 		if (miktar > 0 && miktar <= Database.hesapList.get(index).getPara()) {
 			System.out.println("Para göndermek istediğiniz hesabın ID'sini giriniz: ");
 			Hesap yasar = findId();
-			Database.hesapList.get(index).setPara(Database.hesapList.get(index).getPara() - miktar);
-			Database.hesapList.get(Database.hesapList.indexOf(yasar)).setPara(yasar.getPara() + miktar);
-			System.out.println("Parayı yolladın enayi (" + miktar + " tl)\nYeni bakiyen: "
-					+ Database.hesapList.get(index).getPara());
+			if (Database.hesapList.indexOf(yasar) != index) {
+
+				Database.hesapList.get(index).setPara(Database.hesapList.get(index).getPara() - miktar);
+				Database.hesapList.get(Database.hesapList.indexOf(yasar)).setPara(yasar.getPara() + miktar);
+				System.out.println(yasar.getIsim() + " kişisine " + miktar + " tlyi yolladın enayi \nYeni bakiyen: "
+						+ Database.hesapList.get(index).getPara());
+			} else {
+				System.out.println("Kendi kendine para atamazsın bro. Tekrar dene.");
+				paraGonder(index);
+			}
 
 		} else {
 			System.out.println("Değer 0'dan büyük olmalıdır veya bakiyenizden küçük olmalıdır; Bakiyeniz: "
