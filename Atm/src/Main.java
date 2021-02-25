@@ -17,8 +17,9 @@ public class Main {
 			System.out.println("2. Para yatır");
 			System.out.println("3. Para çek");
 			System.out.println("4. Para gönder");
-			System.out.println("5. Girişe dön ");
-			System.out.println("6. Programdan çık ");
+			System.out.println("5. Hesabı sil");
+			System.out.println("6. Girişe dön ");
+			System.out.println("7. Programdan çık ");
 			System.out.println("**********************************************");
 
 			String secim = in.next();
@@ -47,14 +48,20 @@ public class Main {
 			case "4":
 				paraGonder(index);
 				break;
-			case "6":
-				System.out.println("Çıkış yapılıyor...");
-				break menu;
 			case "5":
+				removeAcc(index);
+				in.nextLine();
+				startUp();
+				break;
+
+			case "6":
 				in.hasNextLine();
 				in.nextLine();
 				startUp();
 				break;
+			case "7":
+				System.out.println("Çıkış yapılıyor...");
+				break menu;
 			}
 		}
 	}
@@ -215,5 +222,11 @@ public class Main {
 
 		}
 		return Database.hesapList.get(i);
+	}
+
+	public static void removeAcc(int index) {
+		Database.deletedList.add(Database.hesapList.get(index));
+		Database.hesapList.remove(index);
+		System.out.println("Hesap başarıyla silindi.\nÇıkış yapılıyor...");
 	}
 }
