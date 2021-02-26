@@ -2,7 +2,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
-
+static int a;
 	static Scanner in = new Scanner(System.in);
 
 	public static void main(String[] args) {
@@ -37,6 +37,7 @@ public class Main {
 			String password = in.nextLine();
 			Accounts account = new Accounts(username, password);
 			Database.accountList.add(account);
+			a=Database.accountList.indexOf(account);
 			System.out.println("You registered.");
 			startUp();
 			return;
@@ -102,7 +103,7 @@ public class Main {
 		menu();
 	}
 
-	public static void game() {
+	public static void game(int a) {
 		int guess;
 		Random random = new Random();
 		int point = 0;
@@ -115,6 +116,9 @@ public class Main {
 			if (guess != number) {
 				System.out.println("Wrong guess, number was: " + number);
 				System.err.println("Your point: " + point);
+				if(point>Database.accountList.get(a).getHighscore()) {
+					Database.accountList.get(a).setHighscore(point);
+				}
 				menu();
 				break;
 			}
@@ -129,27 +133,24 @@ public class Main {
 		System.out.println("****************************");
 		System.out.println("1. Play the game");
 		System.out.println("2. Logout");
-		System.out.println("3. Show last score list");
-		System.out.println("4. Show high score");
-		System.out.println("5. Exit");
+		System.out.println("3. Show high score");
+		System.out.println("4. Exit");
 		int chose = in.nextInt();
 		in.nextLine();
 		switch (chose) {
 		case 1:
-			game();
+			game(a);
 			break;
 		case 2:
 			startUp();
 			return;
 		case 3:
-			// to do
-			break;
+			System.out.println("Highscore: " + Database.accountList.get(a).getHighscore());
+			menu();
+			return;
 		case 4:
-			// to do
-			break;
-		case 5:
-			// to do
-			break;
+			System.out.println("Goodbye...");
+			return;
 		}
 	}
 }
