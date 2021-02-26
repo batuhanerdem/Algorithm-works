@@ -52,7 +52,7 @@ public class Main {
 				removeAcc(index);
 				in.nextLine();
 				startUp();
-				break;
+				return;
 
 			case "6":
 				in.hasNextLine();
