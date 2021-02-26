@@ -2,7 +2,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
-static int a;
+	static int a;
 	static Scanner in = new Scanner(System.in);
 
 	public static void main(String[] args) {
@@ -31,17 +31,8 @@ static int a;
 	public static void register() {
 		System.out.println("Please enter an username: ");
 		String username = in.nextLine();
-
-		if (Database.accountList.size() == 0) {
-			System.out.println("Please enter a password: ");
-			String password = in.nextLine();
-			Accounts account = new Accounts(username, password);
-			Database.accountList.add(account);
-			System.out.println("You registered.");
-			startUp();
-			return;
-		}
 		boolean check = true;
+
 		for (int i = 0; i < Database.accountList.size(); i++) {
 
 			if (username.equals(Database.accountList.get(i).getUsername())) {
@@ -72,7 +63,7 @@ static int a;
 		int i;
 		for (i = 0; i < Database.accountList.size(); i++) {
 			if (username.equals(Database.accountList.get(i).getUsername())) {
-				a=i;
+				a = i;
 				check = true;
 				break;
 			}
@@ -80,30 +71,19 @@ static int a;
 		if (check) {
 			System.out.println("Enter password: ");
 			String password = in.nextLine();
-			for (i = 0; i < Database.accountList.size(); i++) {
-				if (password.equals(Database.accountList.get(i).getPassword())) {
-					check = true;
-					break;
-				} else {
-					check = false;
-				}
+			if (!password.equals(Database.accountList.get(a).getPassword())) {
+				check = false;
 			}
-			if (check) {
-
-			} else {
+			if (!check) {
 				System.out.println("Wrong password, try again");
 				login();
 				return;
 			}
-		} else {
-			System.out.println("Wrong username, try again");
-			login();
-			return;
 		}
 		menu();
 	}
 
-	public static void game(int a) {
+	public static void game() {
 		int guess;
 		Random random = new Random();
 		int point = 0;
@@ -116,7 +96,7 @@ static int a;
 			if (guess != number) {
 				System.out.println("Wrong guess, number was: " + number);
 				System.err.println("Your point: " + point);
-				if(point>Database.accountList.get(a).getHighscore()) {
+				if (point > Database.accountList.get(a).getHighscore()) {
 					Database.accountList.get(a).setHighscore(point);
 				}
 				menu();
@@ -139,7 +119,7 @@ static int a;
 		in.nextLine();
 		switch (chose) {
 		case 1:
-			game(a);
+			game();
 			break;
 		case 2:
 			startUp();
