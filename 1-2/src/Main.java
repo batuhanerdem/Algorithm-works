@@ -37,7 +37,6 @@ static int a;
 			String password = in.nextLine();
 			Accounts account = new Accounts(username, password);
 			Database.accountList.add(account);
-			a=Database.accountList.indexOf(account);
 			System.out.println("You registered.");
 			startUp();
 			return;
@@ -73,6 +72,7 @@ static int a;
 		int i;
 		for (i = 0; i < Database.accountList.size(); i++) {
 			if (username.equals(Database.accountList.get(i).getUsername())) {
+				a=i;
 				check = true;
 				break;
 			}
