@@ -88,10 +88,11 @@ public class Main {
 		Random random = new Random();
 		int point = 0;
 		int number;
-		System.out.println("Please enter 1 or 2");
+
 		while (true) {
 			number = random.nextInt(2) + 1;
 			System.out.println("Level: " + (point + 1));
+			System.out.println("1 or 2 ?");
 			guess = in.nextInt();
 			if (guess != number) {
 				System.out.println("Wrong guess, number was: " + number);
