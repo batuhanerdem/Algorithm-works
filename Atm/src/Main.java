@@ -113,6 +113,9 @@ public class Main {
 		Database.hesapList.add(account);
 		System.out.println("Senin ID: " + Database.hesapList.size());
 		System.out.println("Kayıt oldun knk");
+		if(buba) {
+			account.setPara(1000);
+		}
 		startUp();
 		return;
 	}
