@@ -79,6 +79,10 @@ public class Main {
 				login();
 				return;
 			}
+		} else {
+			System.out.println("Wrong username, try again");
+			login();
+			return;
 		}
 		menu();
 	}
