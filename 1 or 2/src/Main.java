@@ -85,6 +85,7 @@ public class Main {
 			return;
 		}
 		menu();
+		return;
 	}
 
 	public static void game() {
@@ -113,29 +114,35 @@ public class Main {
 	}
 
 	public static void menu() {
-		System.out.println("****************************");
-		System.out.println("Menu");
-		System.out.println("****************************");
-		System.out.println("1. Play the game");
-		System.out.println("2. Logout");
-		System.out.println("3. Show high score");
-		System.out.println("4. Exit");
-		int chose = in.nextInt();
-		in.nextLine();
-		switch (chose) {
-		case 1:
-			game();
-			break;
-		case 2:
-			startUp();
-			return;
-		case 3:
-			System.out.println("Highscore: " + Database.accountList.get(a).getHighscore());
-			menu();
-			return;
-		case 4:
-			System.out.println("Goodbye...");
-			return;
+			System.out.println("****************************");
+			System.out.println("Menu");
+			System.out.println("****************************");
+			System.out.println("1. Play the game");
+			System.out.println("2. Logout");
+			System.out.println("3. Show high score");
+			System.out.println("4. Exit");
+
+			int chose = in.nextInt();
+			in.nextLine();
+			switch (chose) {
+			case 1:
+				game();
+				break;
+			case 2:
+				startUp();
+				return;
+			case 3:
+				System.out.println("Highscore: " + Database.accountList.get(a).getHighscore());
+				menu();
+				return;
+			case 4:
+				System.out.println("Goodbye...");
+				return;
+			default:
+				System.out.println("Please enter a number (1-4)");
+				menu();
+				return;
+			
 		}
 	}
 }
