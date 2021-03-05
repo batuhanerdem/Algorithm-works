@@ -13,13 +13,13 @@ public class Main {
 	private static void menu(int index) {
 		menu: while (true) {
 			System.out.println("**********************************************");
-			System.out.println("1. Bilgi gÃ¶ster");
-			System.out.println("2. Para yatÄ±r");
-			System.out.println("3. Para Ã§ek");
-			System.out.println("4. Para gÃ¶nder");
-			System.out.println("5. HesabÄ± sil");
-			System.out.println("6. GiriÅŸe dÃ¶n ");
-			System.out.println("7. Programdan Ã§Ä±k ");
+			System.out.println("1. Bilgi göster");
+			System.out.println("2. Para yatır");
+			System.out.println("3. Para çek");
+			System.out.println("4. Para gönder");
+			System.out.println("5. Hesabı sil");
+			System.out.println("6. Girişe dön ");
+			System.out.println("7. Programdan çık ");
 			System.out.println("**********************************************");
 
 			String secim = in.next();
@@ -30,16 +30,16 @@ public class Main {
 				break;
 
 			case "2":
-				System.out.println("KaÃ§ gayme atÄ±yon bize   ");
+				System.out.println("Kaç gayme atıyon bize   ");
 				int miktar = in.nextInt();
-				parayatir(miktar, index);
+				paraYatır(miktar, index);
 				break;
 			case "3":
-				System.out.println("Ã‡ok Ã§ekme la\nNeyse kaÃ§ Ã§ekiyon? ");
+				System.out.println("Çok çekme la\nNeyse kaç çekiyon? ");
 				miktar = in.nextInt();
 				while (miktar > Database.hesapList.get(index).getPara()) {
 					System.out.println(
-							"O kadar yok yalnÄ±z kanki sende. Senin bakiye: " + Database.hesapList.get(index).getPara());
+							"O kadar yok yalnız kanki sende. Senin bakiye: " + Database.hesapList.get(index).getPara());
 					System.out.println("Tekrar gir bakim: ");
 					miktar = in.nextInt();
 				}
@@ -60,7 +60,7 @@ public class Main {
 				startUp();
 				break;
 			case "7":
-				System.out.println("Ã‡Ä±kÄ±ÅŸ yapÄ±lÄ±yor...");
+				System.out.println("Çıkış yapılıyor...");
 				break menu;
 			}
 		}
@@ -68,24 +68,24 @@ public class Main {
 
 	private static void startUp() {
 		System.out.println("**********************************************");
-		System.out.println("1. GiriÅŸ yap yoldaÅŸ");
-		System.out.println("2. KayÄ±t ol yoldaÅŸ");
+		System.out.println("1. Giriş yap yoldaş");
+		System.out.println("2. Kayıt ol yoldaş");
 		System.out.println("**********************************************");
 		String secim = in.nextLine();
 		switch (secim) {
 		case "1":
-		case "giriÅŸ yap yoldaÅŸ":
-		case "GiriÅŸ yap yoldaÅŸ":
+		case "giriş yap yoldaş":
+		case "Giriş yap yoldaş":
 			login();
 			break;
 
 		case "2":
-		case "kayÄ±t ol yoldaÅŸ":
-		case "KayÄ±t ol yoldaÅŸ":
+		case "kayıt ol yoldaş":
+		case "Kayıt ol yoldaş":
 			register();
 			break;
 		default:
-			System.err.println("\nNe yazÄ±yon yoldaÅŸ?\n");
+			System.err.println("\nNe yazıyon yoldaş?\n");
 			startUp();
 			break;
 		}
@@ -93,26 +93,26 @@ public class Main {
 
 	private static void register() {
 		boolean buba;
-		System.out.println("KayÄ±da hoÅŸgeldiniz...");
-		System.out.println("Ä°sim giriniz: ");
+		System.out.println("Kayıda hoşgeldiniz...");
+		System.out.println("İsim giriniz: ");
 		String isim = in.nextLine();
-		System.out.println("Å�ifre giriniz: ");
+		System.out.println("Şifre giriniz: ");
 		String sifre = in.nextLine();
-		System.out.println("Buba var mÄ±?(e/h)");
+		System.out.println("Buba var mı?(e/h)");
 		String baba = in.nextLine();
 		if (baba.equals("e")) {
 			buba = true;
 		} else if (baba.equals("h")) {
 			buba = false;
 		} else {
-			System.err.println("BabacÄ±m ya e ya h yazcan neyini anlamadÄ±n");
+			System.err.println("Babacım ya e ya h yazcan neyini anlamadın");
 			register();
 			return;
 		}
 		Hesap account = new Hesap(isim, sifre, 100, buba, 0, Database.hesapList.size() + 1);
 		Database.hesapList.add(account);
 		System.out.println("Senin ID: " + Database.hesapList.size());
-		System.out.println("KayÄ±t oldun knk");
+		System.out.println("Kayıt oldun knk");
 		if(buba) {
 			account.setPara(1000);
 		}
@@ -121,10 +121,10 @@ public class Main {
 	}
 
 	private static void login() {
-		System.out.println("GiriÅŸe hoÅŸgeldiniz...");
+		System.out.println("Girişe hoşgeldiniz...");
 		Hesap yasar = findId();
 
-		System.out.println("Å�ifrenizi giriniz:");
+		System.out.println("Şifrenizi giriniz:");
 		in.nextLine();
 		String sifre = in.nextLine();
 
@@ -134,7 +134,7 @@ public class Main {
 			menu(i);
 
 		} else {
-			System.out.println("Å�ifrenizi yanlÄ±ÅŸ girdiniz... LÃ¼tfen tekrar deneyiniz.");
+			System.out.println("Şifrenizi yanlış girdiniz... Lütfen tekrar deneyiniz.");
 			login();
 		}
 
@@ -142,24 +142,24 @@ public class Main {
 
 	private static void bilgi(int index) {
 
-		System.out.println("\nÄ°sim: " + Database.hesapList.get(index).getIsim());
+		System.out.println("\nİsim: " + Database.hesapList.get(index).getIsim());
 		System.out.println("Bakiye: " + Database.hesapList.get(index).getPara());
 		System.out.println(
-				"Baba: " + (Database.hesapList.get(index).isbuba() ? "var(ÅŸanslÄ± araba)" : "yok(welcome to club)"));
-		System.out.println("GiriÅŸ: " + Database.hesapList.get(index).getGiris() + ". kez girildi.");
+				"Baba: " + (Database.hesapList.get(index).isbuba() ? "var(şanslı araba)" : "yok(welcome to club)"));
+		System.out.println("Giriş: " + Database.hesapList.get(index).getGiris() + ". kez girildi.");
 
 	}
 
-	private static void parayatir(int miktar, int index) {
+	private static void paraYatır(int miktar, int index) {
 		if (miktar > 0) {
 			Database.hesapList.get(index).setPara(Database.hesapList.get(index).getPara() + miktar);
-			System.out.println(miktar + " lirayÄ± bize verdin(enayi), yeni bakiyen: "
+			System.out.println(miktar + " lirayı bize verdin(enayi), yeni bakiyen: "
 					+ Database.hesapList.get(index).getPara() + "\n");
 			return;
 		}
-		System.out.println("Kanka eksili para yatÄ±raman yok Ã¶yle bi ÅŸey.\n0'dan bÃ¼yÃ¼k bi ÅŸey yaz: ");
+		System.out.println("Kanka eksili para yatıraman yok öyle bi şey.\n0'dan büyük bi şey yaz: ");
 		int yenimiktar = in.nextInt();
-		parayatir(yenimiktar, index);
+		paraYatır(yenimiktar, index);
 
 	}
 
@@ -167,39 +167,39 @@ public class Main {
 		if (miktar > 0) {
 			Database.hesapList.get(index).setPara(Database.hesapList.get(index).getPara() - miktar);
 			System.out.println(
-					"Vermem ki o kadar\n " + "Å�aka ÅŸaka " + miktar + " lirayÄ± sana verdik(enayi olduk), yeni bakiyen: "
+					"Vermem ki o kadar\n " + "Şaka şaka " + miktar + " lirayı sana verdik(enayi olduk), yeni bakiyen: "
 							+ Database.hesapList.get(index).getPara() + "\n");
 			if (Database.hesapList.get(index).getPara() == 0) {
 				System.out.println("Fakirsin xd");
 			}
 			return;
 		}
-		System.out.println("Kanka eksili para Ã§ekemen, bize para vermiÅŸ oluyon Ã¶yle(enayi).\n0'dan bÃ¼yÃ¼k bi ÅŸey yaz: ");
+		System.out.println("Kanka eksili para çekemen, bize para vermiş oluyon öyle(enayi).\n0'dan büyük bi şey yaz: ");
 		int yenimiktar = in.nextInt();
 		paraCek(yenimiktar, index);
 
 	}
 
 	private static void paraGonder(int index) {
-		System.out.println("MiktarÄ± giriniz: ");
+		System.out.println("Miktarı giriniz: ");
 		int miktar = in.nextInt();
 		if (miktar > 0 && miktar <= Database.hesapList.get(index).getPara()) {
-			System.out.println("Para gÃ¶ndermek istediÄŸiniz hesabÄ±n ID'sini giriniz: ");
+			System.out.println("Para göndermek istediğiniz hesabın ID'sini giriniz: ");
 			Hesap yasar = findId();
 			if (Database.hesapList.indexOf(yasar) != index) {
 
 				Database.hesapList.get(index).setPara(Database.hesapList.get(index).getPara() - miktar);
 				Database.hesapList.get(Database.hesapList.indexOf(yasar)).setPara(yasar.getPara() + miktar);
-				System.out.println(yasar.getIsim() + " kiÅŸisine " + miktar + " tlyi yolladÄ±n enayi \nYeni bakiyen: "
+				System.out.println(yasar.getIsim() + " kişisine " + miktar + " tlyi yolladın enayi \nYeni bakiyen: "
 						+ Database.hesapList.get(index).getPara());
 			} else {
-				System.out.println("Kendi kendine para atamazsÄ±n bro. Tekrar dene.");
+				System.out.println("Kendi kendine para atamazsın bro. Tekrar dene.");
 				paraGonder(index);
 			}
 
 		} else {
-			System.out.println("DeÄŸer 0'dan bÃ¼yÃ¼k olmalÄ±dÄ±r veya bakiyenizden kÃ¼Ã§Ã¼k olmalÄ±dÄ±r; Bakiyeniz: "
-					+ Database.hesapList.get(index).getPara() + "\nÄ°ÅŸlem iptal ediliyor...");
+			System.out.println("Değer 0'dan büyük olmalıdır veya bakiyenizden küçük olmalıdır; Bakiyeniz: "
+					+ Database.hesapList.get(index).getPara() + "\nİşlem iptal ediliyor...");
 			return;
 		}
 	}
@@ -220,7 +220,7 @@ public class Main {
 		}
 		if (!isContains) {
 
-			System.out.println("ID'yi yanlÄ±ÅŸ girdiniz... LÃ¼tfen tekrar deneyiniz.");
+			System.out.println("ID'yi yanlış girdiniz... Lütfen tekrar deneyiniz.");
 			return findId();
 
 		}
@@ -230,6 +230,6 @@ public class Main {
 	public static void removeAcc(int index) {
 		Database.deletedList.add(Database.hesapList.get(index));
 		Database.hesapList.remove(index);
-		System.out.println("Hesap baÅŸarÄ±yla silindi.\nÃ‡Ä±kÄ±ÅŸ yapÄ±lÄ±yor...");
+		System.out.println("Hesap başarıyla silindi.\nÇıkış yapılıyor...");
 	}
 }

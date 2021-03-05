@@ -1,4 +1,3 @@
-
 public class Hesap {
 
 	private String isim;
