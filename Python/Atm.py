@@ -8,7 +8,6 @@ class Account():
         self.password = password
         self.phoneNumber = phoneNumber
         self.bakiye = bakiye
-        print("init is working")
 
 
 def startUp():
@@ -62,10 +61,11 @@ def menu():
                     3) Para cek
                     4) Para gonder
                     5) Hesaptan cik
-                    6) Uygulamadan cik""")
+                    6) Hesabi sil
+                    7) Uygulamadan cik""")
         secim = input()
 
-        if secim == "6":
+        if secim == "7":
             print("Programdan cikiliyor...")
             return
 
@@ -91,6 +91,10 @@ def menu():
 
         elif secim == "5":
             login()
+            return
+        elif secim == "6":
+            hesabiSil()
+            startUp()
             return
 
 
@@ -128,6 +132,11 @@ def paraGonder(numara, gonderMiktar):
         yeniMiktar = int(input("Lutfen bakiyenizden daha dusuk bir deger giriniz: "))
         paraGonder(numara, yeniMiktar)
         return
+
+
+def hesabiSil():
+    print(f"{accountList[index].name} ismindeki hesabiniz silinmistir...")
+    accountList.remove(accountList[index])
 
 
 startUp()
